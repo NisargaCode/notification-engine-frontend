@@ -1,0 +1,662 @@
+/* src/App.css */
+
+/* --- Basic Resets & Global Styles --- */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: -apple-system, BlinkMacMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5;
+  color: #333;
+  overflow-x: hidden;
+}
+/* --- Overall Dashboard Layout --- */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  max-height: 100vh; /* Add this line */
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- Sidebar Styling --- */
+.sidebar {
+  width: 250px;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 20px 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  padding: 0 20px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+}
+
+.saskin-logo-small {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.sidebar-brand-text {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #ecf0f1;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav li {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-nav li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav li.active {
+  background-color: #3498db;
+  font-weight: bold;
+}
+
+.sidebar-nav .icon {
+  margin-right: 15px;
+  font-size: 18px;
+}
+
+/* --- Main Content Area --- */
+.main-content-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f2f5;
+  margin-left: 0;
+  transition: margin-left 0.3s ease-in-out;
+  width: 100%;
+  overflow-y: auto; /* Add this line */
+}
+
+/* When sidebar is OPEN, push main content to the right */
+.main-content-area:not(.sidebar-closed) {
+  margin-left: 250px; /* Same width as sidebar */
+}
+
+/* --- Main Header --- */
+/* --- Main Header --- */
+.main-header {
+  background-color: #ffffff;
+  padding: 15px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  margin: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-header .page-title {
+  /* ⭐ Refinement 1: Pushes content to the right ⭐ */
+  margin-right: auto;
+  margin-left: 15px; /* Add some space after the hamburger menu if needed */
+  font-size: 1.5em; /* Main title size */
+  color: #2c3e50;
+  white-space: nowrap; /* Prevent title from wrapping */
+}
+
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjusted gap for better spacing */
+}
+
+.header-search {
+  padding: 8px 12px;
+  border: 1px solid #3498db;
+  border-radius: 5px;
+  outline: none;
+  width: 180px;
+}
+
+.search-icon {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: #3498db;
+  padding: 0 5px;
+}
+
+/* NEW: Clear Search Button style */
+.clear-search-btn {
+  background-color: #ccc;
+  color: #333;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
+}
+
+.clear-search-btn:hover {
+  background-color: #bbb;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3498db;
+}
+
+/* --- Hamburger Menu Button --- */
+.hamburger-menu {
+  background: none;
+  border: none;
+  font-size: 1.5em; /* Reduced size */
+  color: #2c3e50;
+  cursor: pointer;
+  /* Removed margin-right as flexbox handles spacing */
+  display: block;
+}
+
+
+/* --- Dashboard Widgets/Sections --- */
+.dashboard-widgets {
+  flex-grow: 1;
+  padding: 0 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ⭐ Refinement 2: Centered "Meetings Dashboard" title ⭐ */
+.section-title.meetings-dashboard-title {
+  text-align: center; /* Center the text */
+  font-size: 28px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  color: #0056b3;
+}
+
+.section-subtitle {
+  font-size: 1.4em;
+  color: #555;
+  margin-top: 0;
+  /* No specific flex or image-related styles needed here anymore for the emoji */
+}
+
+/* Removed .header-calendar-icon styling as it's no longer needed */
+
+
+.upcoming-section {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Styles for the row containing subtitle and buttons */
+.upcoming-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.table-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.refine-btn, .reschedule-btn, .add-training-btn, .delete-selected-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.add-training-btn {
+    background-color: #4CAF50; /* Green for Add/Confirm */
+    color: white;
+}
+.add-training-btn:hover {
+    background-color: #45a049;
+}
+
+.refine-btn {
+  background-color: #ecf0f1;
+  color: #555;
+}
+.refine-btn:hover {
+    background-color: #ddd;
+}
+
+.reschedule-btn {
+  background-color: #3498db;
+  color: #ffffff;
+}
+.reschedule-btn:hover {
+    background-color: #2980b9;
+}
+
+.delete-selected-btn {
+    background-color: #e74c3c; /* Red for Delete */
+    color: white;
+}
+.delete-selected-btn:hover {
+    background-color: #c0392b;
+}
+
+.cancel-btn {
+    background-color: #95a5a6; /* Grey for Cancel */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+.cancel-btn:hover {
+    background-color: #7f8c8d;
+}
+
+/* --- Table Styling --- */
+.notification-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.notification-table thead th {
+  background-color: #f8f8f8;
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  font-weight: normal;
+  color: #666;
+}
+
+.notification-table tbody td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.notification-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.notification-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.notification-table input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2); /* Slightly larger checkboxes */
+}
+
+.notification-table .view-details-btn {
+  background-color: #2ecc71; /* Green color for details */
+  color: #ffffff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
+}
+.notification-table .view-details-btn:hover {
+    background-color: #27ae60;
+}
+
+/* NEW: Styles for notification status badges */
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status-badge.sent {
+  background-color: #e6ffe6; /* Light green */
+  color: #28a745; /* Darker green */
+}
+
+.status-badge.pending {
+  background-color: #fff3cd; /* Light yellow */
+  color: #ffc107; /* Orange/Yellow */
+}
+
+.status-badge.missed { /* Added missed status styling */
+    background-color: #fcebeb; /* Light red */
+    color: #cc0000; /* Darker red */
+}
+
+/* --- New Styles for Inline Add/Reschedule Training Forms --- */
+.add-training-inline-form-container {
+  background-color: #f8f9fa; /* Light background for the form area */
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px; /* Space it from the buttons above */
+  margin-bottom: 30px; /* Space it from the table below */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.add-training-inline-form-container h3 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 1.6em;
+  text-align: center;
+}
+
+.add-training-form, .reschedule-training-form { /* Apply common styles */
+  display: grid;
+  grid-template-columns: 1fr; /* Default to single column */
+  gap: 15px; /* Space between form rows */
+  max-width: 600px; /* Limit width for better readability */
+  margin: 0 auto; /* Center the form */
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    font-size: 0.95em;
+}
+
+.form-row input[type="text"],
+.form-row input[type="email"], /* If you add email input */
+.form-row input[type="datetime-local"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 100%; /* Ensure inputs take full width of their grid column */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.reschedule-training-inline-form-container .selected-count {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.reschedule-training-inline-form-container .reschedule-context {
+    background-color: #eaf6ff;
+    border: 1px solid #b3d9ff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.reschedule-training-inline-form-container .reschedule-context p {
+    margin: 5px 0;
+}
+
+.notification-table .send-now-btn {
+    background-color: #f39c12; /* Orange for Send Now */
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.notification-table .send-now-btn:hover:not(:disabled) {
+    background-color: #e67e22;
+}
+
+.notification-table .send-now-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+
+/* --- Details Popup Styling --- */
+/* --- Details Popup Styling --- */
+.details-popup {
+    position: absolute;
+    bottom: 100%; /* Positions the bottom of the popup above the button */
+    right: 0; /* Aligns the right edge of the popup with the right edge of the button */
+    margin-bottom: 10px; /* Adds a gap between the button and the popup */
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 250px;
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: normal;
+    color: #333;
+    font-size: 14px;
+}
+.details-popup strong {
+    color: #2c3e50;
+}
+
+.details-popup ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 5px;
+}
+
+.details-popup ul li {
+    margin-bottom: 3px;
+}
+
+/* --- Modal Overlay and Content --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; /* Above everything */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeInScale 0.3s ease-out;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    margin-bottom: 25px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Animation for modal */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px; /* Slightly smaller sidebar on smaller screens */
+  }
+
+  .main-content-area:not(.sidebar-closed) {
+    margin-left: 200px;
+  }
+
+  .main-header {
+    flex-wrap: wrap; /* Allow header items to wrap */
+    justify-content: center;
+    padding: 10px 15px;
+  }
+
+  .main-header .page-title {
+    width: 100%; /* Take full width */
+    text-align: center;
+    margin: 10px 0; /* Add vertical margin */
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px; /* Space from title */
+  }
+
+  .header-search {
+    width: 100%; /* Full width search bar */
+  }
+
+  .hamburger-menu {
+    position: absolute; /* Position absolutely to break flow */
+    left: 10px;
+    top: 15px;
+  }
+
+  .dashboard-widgets {
+    padding: 15px;
+  }
+
+  .upcoming-header-row {
+    flex-direction: column; /* Stack header items vertically */
+    align-items: flex-start; /* Align to left */
+    gap: 15px; /* Space between subtitle and controls */
+  }
+
+  .table-controls {
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .notification-table {
+    font-size: 0.9em; /* Smaller font for table content */
+  }
+
+  .notification-table thead th,
+  .notification-table tbody td {
+    padding: 8px 10px;
+  }
+
+  .add-training-form {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%; /* Full width sidebar on very small screens */
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .main-content-area {
+    margin-left: 0 !important; /* Always 0 margin on tiny screens, sidebar overlaps */
+  }
+  .hamburger-menu {
+    left: 5px;
+  }
+  .main-header {
+    padding: 10px;
+    margin: 10px;
+  }
+  .user-avatar {
+    width: 35px;
+    height: 35px;
+  }
+  .section-title.meetings-dashboard-title {
+    font-size: 22px;
+  }
+  .section-subtitle {
+    font-size: 1.2em;
+  }
+  .table-controls button {
+    width: 100%; /* Full width buttons in controls */
+    margin-bottom: 5px;
+  }
+}
