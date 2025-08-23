@@ -37,8 +37,8 @@ function App() {
   };
 
   // ⭐ ADDED THIS CONSTANT ⭐
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
-
+ console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Delete' && selectedTrainingIds.length > 0) {
